@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DC Zombicide Tracker</title>
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+
+body{
+font-family:-apple-system,Arial;
+background:#111;
+color:white;
+margin:0;
+padding:20px;
+}
+
+h1{
+text-align:center;
+}
+
+.progress{
+background:#333;
+height:25px;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.bar{
+height:25px;
+background:#28e17c;
+width:0%;
+text-align:center;
+line-height:25px;
+color:black;
+font-weight:bold;
+}
+
+.section{
+background:#1b1b1b;
+border-radius:10px;
+padding:15px;
+margin-bottom:15px;
+}
+
+label{
+display:block;
+padding:6px 0;
+}
+
+input{
+margin-right:10px;
+transform:scale(1.2);
+}
+
+.search{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+border:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🧟 DC Zombicide Tracker</h1>
+
+<div class="progress">
+<div id="bar" class="bar">0%</div>
+</div>
+
+<div class="section">
+
+<h2>Core Game</h2>
+
+<label><input type="checkbox" id="core"> Gotham City Outbreak</label>
+
+</div>
+
+<div class="section">
+
+<h2>Expansions</h2>
+
+<label><input type="checkbox"> Arkham Asylum</label>
+<label><input type="checkbox"> Gotham Knights</label>
+<label><input type="checkbox"> Green Lantern Corpse</label>
+<label><input type="checkbox"> Undead Gods</label>
+<label><input type="checkbox"> Shadowpact</label>
+<label><input type="checkbox"> Unkillables</label>
+<label><input type="checkbox"> Mother Box</label>
+<label><input type="checkbox"> Life Equation</label>
+
+</div>
+
+<div class="section">
+
+<h2>Hero Tracker</h2>
+
+<input class="search" id="search" placeholder="Search heroes...">
+
+<div id="heroes">
+
+<label><input type="checkbox"> Batman</label>
+<label><input type="checkbox"> Superman</label>
+<label><input type="checkbox"> Wonder Woman</label>
+<label><input type="checkbox"> Flash</label>
+<label><input type="checkbox"> Aquaman</label>
+<label><input type="checkbox"> Cyborg</label>
+<label><input type="checkbox"> Green Lantern</label>
+<label><input type="checkbox"> Nightwing</label>
+<label><input type="checkbox"> Batgirl</label>
+<label><input type="checkbox"> Robin</label>
+<label><input type="checkbox"> Red Hood</label>
+<label><input type="checkbox"> Harley Quinn</label>
+<label><input type="checkbox"> Zatanna</label>
+<label><input type="checkbox"> Constantine</label>
+<label><input type="checkbox"> Doctor Fate</label>
+<label><input type="checkbox"> Darkseid</label>
+
+</div>
+
+</div>
+
+<script>
+
+const boxes=document.querySelectorAll("input[type=checkbox]");
+const bar=document.getElementById("bar");
+
+function update(){
+
+let total=boxes.length;
+let checked=0;
+
+boxes.forEach(b=>{
+if(b.checked) checked++;
+});
+
+let percent=Math.round((checked/total)*100);
+
+bar.style.width=percent+"%";
+bar.innerText=percent+"%";
+
+}
+
+boxes.forEach((box,i)=>{
+
+let saved=localStorage.getItem("box"+i);
+
+if(saved==="true") box.checked=true;
+
+box.addEventListener("change",()=>{
+
+localStorage.setItem("box"+i,box.checked);
+update();
+
+});
+
+});
+
+document.getElementById("search").addEventListener("input",function(){
+
+let val=this.value.toLowerCase();
+
+document.querySelectorAll("#heroes label").forEach(label=>{
+
+label.style.display=
+label.innerText.toLowerCase().includes(val)
+? "block":"none";
+
+});
+
+});
+
+update();
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker.register("service-worker.js");
+
+}
+
+</script>
+
+</body>
+</html>
