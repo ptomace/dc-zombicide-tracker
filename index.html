@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DC Zombicide Tracker</title>
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+
+body{
+font-family:-apple-system,Arial;
+background:#121212;
+color:white;
+padding:20px;
+margin:0;
+}
+
+h1{
+text-align:center;
+}
+
+.progress{
+background:#333;
+border-radius:20px;
+height:26px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.bar{
+height:26px;
+background:#27e17c;
+width:0%;
+text-align:center;
+line-height:26px;
+color:black;
+font-weight:bold;
+}
+
+.section{
+background:#1c1c1c;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+label{
+display:block;
+padding:6px;
+font-size:16px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🧟 DC Zombicide Collection</h1>
+
+<div class="progress">
+<div id="bar" class="bar">0%</div>
+</div>
+
+<div class="section">
+
+<h2>Core Game</h2>
+
+<label><input type="checkbox" id="core"> Gotham City Outbreak</label>
+
+</div>
+
+<div class="section">
+
+<h2>Retail Expansions</h2>
+
+<label><input type="checkbox" id="arkham"> Arkham Asylum</label>
+<label><input type="checkbox" id="knights"> Gotham Knights</label>
+<label><input type="checkbox" id="lantern"> Green Lantern Corpse</label>
+
+</div>
+
+<div class="section">
+
+<h2>Kickstarter Expansions</h2>
+
+<label><input type="checkbox" id="gods"> Undead Gods</label>
+<label><input type="checkbox" id="shadow"> Shadowpact</label>
+<label><input type="checkbox" id="unkill"> Unkillables</label>
+<label><input type="checkbox" id="mother"> Mother Box</label>
+<label><input type="checkbox" id="life"> Life Equation</label>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
